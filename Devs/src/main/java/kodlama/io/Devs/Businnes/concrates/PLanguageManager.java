@@ -34,14 +34,25 @@ public class PLanguageManager implements PLanguageService {
     @SneakyThrows
     @Override
     public void add(ProgramingLanguage language) {
-        if (language.getName().equals("")){
+        /*
+        if (language.getName().isEmpty()){
             throw  new Exception("Kurs ismi boş olamaz");
         }
+
         for (int i=0;i<languages.size();i++){
             if (language.getName().equals(pLanguageRepository.getById(i).getName())){
                throw  new Exception("bu isimde bir kurs zaten var!");
             }
+        }*/
+        for (ProgramingLanguage programmingLanguage : languages) {
+            if (programmingLanguage.getName().equals(language.getName())) {
+                throw new Exception("Programming language name already exists");
+            }
+            if (programmingLanguage.getName().isEmpty()) {
+                throw new Exception("Programming Language is cannot be empty!");
+            }
         }
+
         pLanguageRepository.add(language);
     }
 
